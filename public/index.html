@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./stylesheets/index.css">
+  <script src="/javascripts/handlebars.js"></script>
+  <title>Contact Manager</title>
+  <script id="contacts-template" type="text/x-handlebars-template">
+    {{#each contacts}}
+      {{> contact}}
+    {{/each}}
+  </script>
+  <script id="contact-template" type="text/x-handlebars-template">  
+    <ul class="contact-ul" id="contact-{{id}}">
+      <li class="contact-row id" style="display:none">{{id}}</li>
+      <li class="contact-row full-name">{{full_name}}</li>
+      <li class="contact-row email">{{email}}</li>
+      <li class="phone_number">{{phone_number}}</li>
+      <li class="tags">{{#each tags}}{{#if @index}}, {{/if}}<a href="#" class="tag">{{this}}</a>{{/each}}</li>
+      <li class="actions"><a class="edit-btn" href="#">Edit</a> <a class="delete-btn" href="#">Delete</a></li>
+    </ul>
+  </script>
+  <script id="update-contact-template" type="text/x-handlebars-template">
+    <form id="update-contact-form">
+      <fieldset>
+        <legend>Update Contact</legend>
+        <input name="id" type="text" value="{{id}}" style="display: none">
+        <label for="full_name-{{id}}"></label>
+        <input id="full_name-{{id}}" value="{{full_name}}"name="full_name" type="text">
+        <label for="email-{{id}}"></label>
+        <input name="email" id="email-{{id}}" value="{{email}}"type="email">
+        <label for="phone_number-{{id}}"></label>
+        <input name="phone_number" id="phone_number-{{id}}" value="{{phone_number}}" type="tel">
+        <label for="tags-{{id}}"></label>
+        <select id="tags-{{id}}" multiple="true"></select>
+        <input type="submit" value="Submit"><input type="reset" value="Cancel">
+
+      </fieldset>
+    </form>
+  </script>
+  <script type="module" src="./javascripts/main.js"></script>
+</head>
+<body>
+  <h1>My Contact Manager</h1>
+  <div id="actions-container">
+    <p>Search Contacts: <input id='search' type="search"></p>
+    <button id="add-contact-btn">Add Contact</button>
+    <button id="add-tags-btn">Add Tags</button>
+    <button id="refresh-btn">Refresh</button>
+  </div>
+  <div id="tag-form-container" class="hide">
+    <form>
+      <p>Add tags separated by commas</p>
+      <input type="text" id="create-tag-input">
+      <input type="submit"><input type="reset" value="Cancel">
+    </form>
+  </div>
+  <div id="form-container">
+    <form id="new-contact-form" class="hide">
+      <fieldset>
+        <legend>New Contact</legend>
+        <label for="new-full_name">Full Name:</label>
+        <input id="new-full_name" name="full_name" type="text">
+        <label for="new-email">Email:</label>
+        <input id="new-email" name='email' type="email">
+        <label for="new-phone_number">Phone:</label>
+        <input id="new-phone_number" name='phone_number' type="tel">
+        <label for="new-tags">Tags:</label>
+        <select id="new-tags" multiple="true"></select>
+        <input type="submit" value="Submit"><input type="button" value="Cancel">
+      </fieldset>
+    </form>
+  </div>
+  <div id="contact-container">
+  </div>
+</body>
+</html>
