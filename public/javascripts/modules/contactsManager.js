@@ -8,7 +8,7 @@ export class ContactsManager {
   }
 
   bindEvents() {
-    this.view.contactContainer.addEventListener('click', this.handleContactActions.bind(this));
+    this.view.contactContainer.addEventListener('click', this.handleContactActions);
     this.view.addContactBtn.addEventListener('click', this.view.toggleNewContactForm.bind(this.view));
     this.view.newContactCancelBtn.addEventListener('click', this.view.toggleNewContactForm.bind(this.view))
     this.view.newContactForm.addEventListener('submit', this.createContact.bind(this));
@@ -53,7 +53,7 @@ export class ContactsManager {
     this.view.toggleNewContactForm();
   }
 
-  handleContactActions(event) {
+  handleContactActions = (event) => {
     if (event.target.tagName !== 'A') { return }
 
     const contactUl = event.target.closest('ul');
